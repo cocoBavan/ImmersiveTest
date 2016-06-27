@@ -1,6 +1,7 @@
 package com.ariyalion.immersivetest;
 
 import android.app.Fragment;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -38,6 +39,8 @@ public class SecondaryFragment extends Fragment {
             mView.setLayoutParams(params);
             mView.requestLayout();
             isSmall = true;
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         }else{
             ((MainActivity)getActivity()).hideSystemUI();
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mView.getLayoutParams();
@@ -46,6 +49,7 @@ public class SecondaryFragment extends Fragment {
             mView.setLayoutParams(params);
             mView.requestLayout();
             isSmall = false;
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }
     }
 }
