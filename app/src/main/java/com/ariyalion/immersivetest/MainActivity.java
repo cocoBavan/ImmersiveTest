@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         if (decorView != null) {
             decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     | View.SYSTEM_UI_FLAG_VISIBLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             );
         }
     }

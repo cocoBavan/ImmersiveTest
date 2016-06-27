@@ -2,8 +2,10 @@ package com.ariyalion.immersivetest;
 
 import android.app.Fragment;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,16 +43,29 @@ public class SecondaryFragment extends Fragment {
             mView.requestLayout();
             isSmall = true;
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         }else{
-            ((MainActivity)getActivity()).hideSystemUI();
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mView.getLayoutParams();
-            params.width = getView().getWidth();
-            params.height = getView().getHeight();
-            mView.setLayoutParams(params);
-            mView.requestLayout();
-            isSmall = false;
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+            goFullScreen(mView);
+        }
+    }
+
+    void goFullScreen(View mView){
+        ((MainActivity)getActivity()).hideSystemUI();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mView.getLayoutParams();
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        params.width = metrics.widthPixels;
+        params.height = metrics.heightPixels;
+        mView.setLayoutParams(params);
+        mView.requestLayout();
+        isSmall = false;
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(!isSmall){
+            goFullScreen(getActivity().findViewById(R.id.second_container));
         }
     }
 }
