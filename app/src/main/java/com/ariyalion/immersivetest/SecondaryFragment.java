@@ -28,8 +28,7 @@ public class SecondaryFragment extends Fragment {
         });
         return view;
     }
-    int originalWidth;
-    int originalHeight;
+
     void resize(View mView){
         if(!isSmall){
             ((MainActivity)getActivity()).showSystemUI();
