@@ -27,6 +27,7 @@ public class SecondaryFragment extends Fragment {
                 resize(getActivity().findViewById(R.id.second_container));
             }
         });
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         return view;
     }
 
